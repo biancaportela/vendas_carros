@@ -177,6 +177,8 @@ Antes de prosseguir com a regressão linear, melhorei o dataset para análise:
 
 ## 5.2 Modelo econométrico
 
+![Analise econometrica](https://github.com/biancaportela/vendas_carros/blob/main/imagens/Venda%20de%20carros.png?raw=true)
+
 A identificação de uma relação de causalidade entre duas variáveis de interesse pode ser representada através de uma equação, onde y é a variável dependente - o fenômeno que desejamos analisar - e x são as variáveis explicativas, que provoca variações em y. A análise dos betas é feita da seguinte maneira: tudo o mais constante, a variação na variável $x_j$ gera um impacto de $B_j$ na variável dependente.
 
 Embora estejamos interessados em saber quanto a quilometragem afeta o preço do carro, outras variáveis também podem influenciar no preço final passado ao consumidor. Por isso as incluímos na regressão, de modo que possam servir como controle.
@@ -309,3 +311,142 @@ Outro passo que pode ser feito é realizar testes de estatística de influência
 Nessa parte do projeto buscamos fazer uma análise preditiva do preço dos carros seminovos a serem vendidos, baseados em suas features.
 
 **Objetivo:** Prever o preço dos carros baseados em suas features.
+
+![Analise preditiva](https://github.com/biancaportela/vendas_carros/blob/main/imagens/analise%20preditiva.png?raw=true)
+
+## 6.1 Preparação dos dados
+
+Durante a fase de preparação dos dados para a modelagem preditiva foram feitos os seguintes passos:
+
+- Separaou-se a variável target do resto do dataset
+- Separou-se os dados entre treino e teste
+- Tratamento das variáveis categóricas através de one hot encoding: No One hot encoding, para cada nível categórico, criamos uma nova variável binária 0 ou 1. Como o modelo base será uma regressão linear, eliminaremos uma das dummies para evitar problemas de multicolineariedade perfeita.Para as variáveis `manufacturer` e `state` diminui as categorias de maneira similar ao que fiz na análise econométrica. Preferi eliminar a variável `model` por ela possuir mais de 2000 categorias únicas.
+- Normalização dos dados: utilizei o MinMaxScaler para normalizar os dados. Como pretendo trabalhar com algumas regressões que utilizam penalização (Ridge), realizarei a normalização em todas as colunas.
+
+## 6.2 Modelo de machine learning
+
+Nos modelos de machine learning, eu dividi entre regressões e modelos de árvore. Como vimos na análise econométrica e na análise exploratória de dados, este dataset apresenta heterocedasticidade nos resíduos, alguns outliers e sua distribuição não é normal. Esses componentes são violações de hipóteses do modelo de regressão clássico. Essas violaçãoes podem levar o modelo a ficar viesado, resultando em um desempenho preditivo pior. 
+
+A solução, portanto, é usar versões modificadas da regressão linear que abordem especificamente a expectativa de outliers no conjunto de dados, sendo as regressões robustas as mais adequadas para esses casos. Em regressões usaremos a OLS não robusta como baseline, a regressão Ridge, a regressão de Huber e a RANSAC. Também usaremos os modelos de Random Tree e XGBoost.
+
+- **Regressão Ridge**: A regressão Ridge é um método de regressão regularizada que reduz a magnitude dos coeficientes através da adição de um termo de penalidade na função de perda, controlado pelo parâmetro de regularização. Isso ajuda a evitar overfitting e melhora a estabilidade do modelo.
+
+- **Regressão de Huber**: um exemplo de algoritmo de regressão robusta que atribui menos peso às observações identificadas como outliers.
+
+- **RANSAC**: RANSAC (Random Sample Consensus) é um algoritmo não determinístico que tenta separar os dados de treinamento em inliers (que podem estar sujeitos a ruído) e outliers. Em seguida, estima o modelo final usando apenas os inliers.
+
+- **Random Forest**: é um algoritmo de aprendizado de máquina que combina várias árvores de decisão independentes e faz previsões tomando uma média ou votação das previsões individuais das árvores, resultando em um modelo mais robusto e com menor tendência ao overfitting.
+
+- **XGBoost**: XGBoost é um algoritmo de boosting de gradiente extremamente poderoso e eficiente, que utiliza árvores de decisão como estimadores fracos e realiza treinamento iterativo para melhorar o desempenho preditivo em problemas de regressão e classificação.
+
+Para melhorar a previsão do modelo e evitar overfitting, utilizei cross validation com 5 k-folds. Feito isso, avaliei os modelos através de algumas métricas. As métricas são R-quadrado, o MAE, RMSE e o MAD.
+
+- **R-quadrado**: O R-quadrado é uma métrica que mede a proporção da variância total dos dados explicada pelo modelo de regressão, indicando o quão bem as variáveis independentes explicam a variabilidade da variável dependente.
+- **MAE**: O MAE é uma métrica que calcula a média dos valores absolutos dos erros entre as previsões do modelo e os valores reais, fornecendo uma medida direta do tamanho médio dos erros de previsão.
+- **RMSE**(Raiz do Erro Quadrático Médio): O RMSE é uma métrica usada para avaliar a precisão de modelos de regressão, que calcula a raiz quadrada da média dos quadrados das diferenças entre os valores previstos e os valores reais.
+- **MAD** (Erro Absoluto Medio): é uma métrica que calcula a media dos valores absolutos dos erros entre as previsões do modelo e os valores reais, proporcionando uma medida robusta e menos sensível a outliers do tamanho médio dos erros de previsão.
+
+|       Modelo       |   R2    |   MAE   |  RMSE   |   MAD   |
+|--------------------|---------|---------|---------|---------|
+| LinearRegression   | 0.618   | 0.040   | 0.060   | 0.040   |
+| Ridge              | 0.618   | 0.040   | 0.060   | 0.040   |
+| HuberRegressor     | 0.605   | 0.039   | 0.061   | 0.039   |
+| RANSACRegressor    | -2.286e20 | 1.615e8 | 9.514e8 | 1.615e8 |
+| RandomForestRegressor | 0.863 | 0.017   | 0.036   | 0.017   |
+| XGBRegressor      | 0.801   | 0.026   | 0.043   | 0.026   |
+
+
+- Os modelos LinearRegression e Ridge apresentam resultados semelhantes em todas as métricas, com R-2 de aproximadamente 0.618, MAE de aproximadamente 0.040, RMSE de aproximadamente 0.060 e MAD de aproximadamente 0.040. Isso ocorre porque Ridge é uma forma de regularização aplicada à regressão linear. Portanto, os resultados são quase idênticos.
+- O modelo de HuberRegressor tem desempenho pior no R2, o que não é surpreendente visto que ele é robusto aos problemas que existem no dataset e que levam a resultados viesados. Ele explica 60% da variação. Seus resultados de MAE e MAD são ligeiramente melhores. Quanto mais perto de 0 o MAE estiver melhor seu resultado. Aqui temos que, em média, as previsões do modelo têm um desvio absoluto médio de aproximadamente 0.039 unidades em relação aos valores reais. O RMSE segue lógica simmilar. O MAD calcula o quão disperso os dados são e o quão distante eles estão, em média, da média dos dados. Um valor baixo de MAD siginifica que os dados estão agrupados ao redor da média, indicando um modelo mais confiável e estável.
+- O modelo de RANSACRegressor apresenta resultados horríveis, incluindo um R2 negativo. Ele provavelmente esta mal especificado.
+- Os modelos de árvore tem resultados melhores, aumentando significativamente o R2 (saindo de 60% nos modelos de regressão para 80% nos modelos de árvore). O MAE, RMSE e MAD também ficam mais próximos de zero. 
+- Desses modelos, o RandomForestRegressor tem o melhor desempenho, tanto com o maior valor do R2 quanto com os menores valores de MAE, RMSE e MAD.
+
+## 6.2.1 Análise dos resíduos
+
+Como o o RandomForestRegressor teve um desempenho superior aos outros modelos, eu vou analisar seus resíduos. A análise de resíduos é um tópico clássico relacionado à modelagem estatística e é frequentemente utilizada para avaliar a adequação de um modelo. Dessa maneira, os resíduos são calculados utilizando-se os dados de treinamento e usados para avaliar se as previssões do modelo se ajustam aos valores observados da variável dependente. Os resíduos também podem nos indicar se o modelo tem erros heterocedásticos ou se são afetados por outliers.
+
+Para a maioria dos modelos, os resíduos devem apresentar um comportamento aleatório com certas propriedades (como, por exemplo, estar concentrados em torno de 0). Se encontrarmos quaisquer desvios sistemáticos do comportamento esperado, eles podem indicar um problema com o modelo (por exemplo, uma variável explicativa omitida ou uma forma funcional incorreta de uma variável incluída no modelo).
+
+Vemos isso no gráfico abaixo:
+
+![Alt text](arvore_resid.png) 
+
+Para um modelo "bom", os resíduos devem se desviar aleatoriamente de zero. Assim, sua distribuição deve ser simétrica em torno de zero, o que implica que seu valor médio (ou mediano) deve ser zero. Além disso, os resíduos devem ser próximos de zero em si mesmos, ou seja, devem apresentar baixa variabilidade. O gráfico acima mostra a diferença entre os resíduos (valores observados da variável target - valor predito) no eixo Y e a variável dependente no eixo X.  A dispersão no painel superior reflete  o aumento da variabilidade dos resíduos para valores ajustados crescentes. Isso indica uma violação da suposição de homoscedasticidade, ou seja, da constância da variância. 
+
+Mas quando vemos o histograma, percebemos que os resíduos se concentram em torno de 0:
+
+![Alt text](hist_resid.png) 
+
+Por fim, fiz um gráfico de erro de previsão que mostra os valores reais do conjunto de dados em relação aos valores previstos gerados pelo nosso modelo. Isso nos permite ver quanto de variação há no modelo. 
+
+Ao exibir esses ajustes de linha no gráfico de erro de previsão, o objetivo é comparar visualmente como as previsões do modelo se comparam aos valores reais. O ajuste de linha "identity" ajuda a identificar se o modelo está sub ou superestimando as previsões de maneira sistemática. O ajuste de linha "best fit" indica a tendência geral do modelo e se ele está sub ou superestimando as previsões de maneira consistente. 
+
+O modelo se ajusta bem para boa parte da amostra, mas perde poder de previsibilidade conforme os valores de y se tornam maiores, subestimando consistentemente os valores reais.
+
+![Alt text](pred_error.png)
+
+# 6.2.2 Feature importance
+
+Nessa seção eu me debrucei em quais as variáveis o Random Florest considerou mais importate para fazer suas previsões. Saber quais variáveis são importantes e quais não são podem ajudar a otimizar o modelo e diminuir o tempo de convergência. 
+
+Primeiramente, eu plotei uma das árvores de decisão feitas pelo algoritmo de Random Florest para os primeiros 3 níveis, de modo que possamos ter uma noção de como elas se divide. Nela podemos ver que a árvore é decidida por ano, drive_fwd, odômetro e cilindros nos níveis iniciais.
+
+
+![Alt text](tree.png)
+
+Na visualização dos features importance, optei pelo método da permutação. Este método  embaralha aleatoriamente cada característica e calcular a mudança no desempenho do modelo. As características que têm maior impacto no desempenho são as mais importantes. Esse método apresenta perfomance melhor ao lidar com dados com alta cardinalidade e com muitas variáveis categóricas.
+
+![Alt text](<feature importance-1.png>)
+
+Por fim, utilizei o método do SelectFromModel. O SelectFromModel selecionará aquelas características cuja importância seja maior do que a importância média de todas as características por padrão. As características selecionadas com base na importância são: `cylinders_4 cylinders`, `cylinders_8 cylinders`, `fuel_gas` ,`fuel_other`, `drive_fwd`,`year`,`odometer`.
+
+ Todos os testes de feature importance que fizemos indica que essas são as variáveis mais importantes para o modelo.
+
+ ## 6.3 Otimização dos hiperparâmetros
+
+ Os hiperparâmetros podem ser pensados como as configurações de um algoritmo que podem ser ajustadas para otimizar o desempenho. Enquanto os parâmetros do modelo são aprendidos durante o treinamento - como a inclinação e o intercepto em uma regressão linear - os hiperparâmetros devem ser definidos pelo cientista de dados antes do treinamento.
+
+Os hiperparâmetros determinam como o algoritmo aprende e generaliza a partir dos dados de treinamento. Eles não são aprendidos a partir dos dados, mas definidos pelo cientista de dados. Essas configurações determinam o comportamento e o desempenho do algoritmo.
+
+Em um modelo de floresta aleatória, os parâmetros podem ser categorizados em dois tipos: aqueles que visam aumentar o poder preditivo do modelo (número de árvores, profundidade máxima, número mínimo de amostras para divisão e número máximo de características) e aqueles que ajudam no treinamento do modelo de forma mais eficiente (random state e number of jobs).
+
+Eu  testei várias combinaçãos de hiperparâmetros e ainda assim não consegui melhorar o modelo para performar melhor que o modelo original. Aparentemente, o fator que mais influencia na capacidade de performance do modelo é diretamente influenciada pelo max_depth. Por motivos computacionais, não consegui tunar os hiperparamêtros de maneira mais eficiente. Isso é um trabalho que pode ser feito posteriormente.
+
+O modelo final, portanto será uma floresta aleatória com os parâmetros originais.
+
+## 6.4 Previsão
+
+Com o modelo final já treinado e com as devidas métricas podemos utiliza-lo para os dados de teste e assim ver o quão bem ele generaliza para dados novos:
+
+|                    | Base de Teste |
+|--------------------|---------------|
+| R2                 | 0.860         |
+| MAE                | 0.017         |
+| RMSE               | 0.036         |
+| MAD                | 0.017         |
+
+Temos resultados similares aos obtidos no treino, mostrando que o modelo generaliza bem.
+
+Podemos ver o histograma dos preços das previsões:
+
+![Alt text](preco_previsao.png) 
+
+### 6.4.1 Interpretação da árvore
+
+Continuemos com a interpretação dos modelos de regressão. O intercepto dos coeficientes das regresões explicam seu valor esperado e como as features impactam a previsão. Um coeficiente positivo indica que se o valor da features aumenta, o valor predito também aumenta. Nós já checamos a feature importance, mas outra método que podemos utilizar é a interpretação das árvores utilizando o pacote `treeinterpreter`. Este pacote calcula o viés e a contribuição de cada feature no modelo. O viés é a média de todo o conjunto de teste.
+
+Cada contribuição lista como ela contribui para cada um dos rótulos (o viés mais a contribuição devem somar a previsão). Ao fim obti o seguinte gráfico:
+
+![Alt text](contribuicao_media-1.png) 
+
+Através desse gráfico, vemos claramente que a variável `odometer` e `drive_fwd` tem as maiores contribuições em fazer com que a árvore preveja que os preços serão mais altos. Já `year` e `fuel_gas` contribuem para que os preços sejam mais baixos.
+
+## 6.5 Conclusões e próximos passos
+
+Acredito que os resultados do modelo estejam razoavelmente satisfatórios. Os próximos passos seriam:
+
+- Lidar melhor com os outliers, de maneira a melhorar as métricas do modelo.
+- Tratar as variáveis com alta cardinalidade por outros métodos que não o One Hot Encoding.
+- Fazer um modelo com apenas as variáveis consideradas importantes pelos testes de feature importance.
+- Fazer o deploy em aplicativo web que permitiria que o cliente escolhesse características do carro e pudesse ter a previsão de seu preço.
