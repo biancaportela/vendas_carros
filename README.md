@@ -197,7 +197,7 @@ Nosso modelo é um caso de modelo log-log, ou modelo de elasticidade constante, 
 
 ![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/ols%20results.png?raw=true)
 
--O coeficiente de `ln_odometer` é a elasticidade do preço em relação ao odomêtro. Assim, quando o odomêtro aumenta em 1% o preço cai em 0.1183%, tudo mais constante.
+- O coeficiente de `ln_odometer` é a elasticidade do preço em relação ao odomêtro. Assim, quando o odomêtro aumenta em 1% o preço cai em 0.1183%, tudo mais constante.
 
 - O R-quadrado é uma medida da proporção da variabilidade na variável dependente (ln_price) que é explicada pelo modelo. Nesse caso, temos que cerca de 43% da variabilidade em ln_price é explicada pelas variáveis independentes incluídas no modelo.
 
@@ -232,7 +232,7 @@ Aqui está a tabela com os resultados fornecidos:
 
 Por o p-valor ser baixo (0.0), temos evidências suficientes para rejeitar a hipótese nula e concluir que há heteroscedasticidade presente. Isso se repete em todos os modelos testados.
 
-### 5.3.2: Testes para problema com os regressores: multicolineariedade
+### 5.3.2 Testes para problema com os regressores: multicolineariedade
 
 A hipótese do modelo de regressão linear clássico diz que a colineariade entre as variáveis independentes não pode existir de forma perfeita. A colineariedade refere-se à situação em que duas variáveis independentes são fortemente correlacionadas,  enquanto a multicolinearidade é a situação em que há mais de duas variáveis explicativas com alto grau de correlação.
 
@@ -263,7 +263,7 @@ As variáveis que possuem alta colineariedade são as dummies de cylinders e a `
 
 Poderiamos lidar com essas dummies com alta colineariedade através de uma proxy ou combina-las em único índice. Isso pode ser feito em um trabalho posterior.
 
-### 5.3.3:  Problemas com os regressores: testes de especificação e endogeneidade
+### 5.3.3  Problemas com os regressores: testes de especificação e endogeneidade
 
 Estatísticamente, podemos realizar alguns tipos de teste que permitem identificar se o modelo escolhido apresenta ou não algum problema de erro de especificação de forma funcional. Neste trabalho usaremos o teste de erro de especificação da regressão de Ramsey (RESET), que também se mostra bastante poderoso para detecção de não lineariedade.
 
@@ -292,7 +292,7 @@ Isso significa que temos uma má especificação no modelo. A má especificaçã
 No caso de variável omitida, temos que os nossos dados não são suficiente para entender as relações de causalidade no modelo. A solução seria arranjar mais dados, ou utilizar alguma variável de proxy para eliminar ou reduzir este problema. Outra forma para resolver o problema de endogeneidade de uma ou mais variáveis explicativas é pelo uso de variáveis intrumentais. Todas essas opções iriam requerer um estudo mais aprofundando sobre o mercado de carros usados e da literatura de preços e demanda, talvez até consulta com especialistas.
 
 
-### 5.3.4: Teste de normalidade dos resíduos
+### 5.3.4 Teste de normalidade dos resíduos
 
 ![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/residuos%202.png?raw=true)
 
@@ -370,13 +370,13 @@ Para a maioria dos modelos, os resíduos devem apresentar um comportamento aleat
 
 Vemos isso no gráfico abaixo:
 
-![Alt text](arvore_resid.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/arvore_resid.png?raw=true) 
 
 Para um modelo "bom", os resíduos devem se desviar aleatoriamente de zero. Assim, sua distribuição deve ser simétrica em torno de zero, o que implica que seu valor médio (ou mediano) deve ser zero. Além disso, os resíduos devem ser próximos de zero em si mesmos, ou seja, devem apresentar baixa variabilidade. O gráfico acima mostra a diferença entre os resíduos (valores observados da variável target - valor predito) no eixo Y e a variável dependente no eixo X.  A dispersão no painel superior reflete  o aumento da variabilidade dos resíduos para valores ajustados crescentes. Isso indica uma violação da suposição de homoscedasticidade, ou seja, da constância da variância. 
 
 Mas quando vemos o histograma, percebemos que os resíduos se concentram em torno de 0:
 
-![Alt text](hist_resid.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/hist_resid.png?raw=true) 
 
 Por fim, fiz um gráfico de erro de previsão que mostra os valores reais do conjunto de dados em relação aos valores previstos gerados pelo nosso modelo. Isso nos permite ver quanto de variação há no modelo. 
 
@@ -384,7 +384,7 @@ Ao exibir esses ajustes de linha no gráfico de erro de previsão, o objetivo é
 
 O modelo se ajusta bem para boa parte da amostra, mas perde poder de previsibilidade conforme os valores de y se tornam maiores, subestimando consistentemente os valores reais.
 
-![Alt text](pred_error.png)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/pred_error.png?raw=true)
 
 # 6.2.2 Feature importance
 
@@ -393,11 +393,11 @@ Nessa seção eu me debrucei em quais as variáveis o Random Florest considerou 
 Primeiramente, eu plotei uma das árvores de decisão feitas pelo algoritmo de Random Florest para os primeiros 3 níveis, de modo que possamos ter uma noção de como elas se divide. Nela podemos ver que a árvore é decidida por ano, drive_fwd, odômetro e cilindros nos níveis iniciais.
 
 
-![Alt text](tree.png)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/tree.png?raw=true)
 
 Na visualização dos features importance, optei pelo método da permutação. Este método  embaralha aleatoriamente cada característica e calcular a mudança no desempenho do modelo. As características que têm maior impacto no desempenho são as mais importantes. Esse método apresenta perfomance melhor ao lidar com dados com alta cardinalidade e com muitas variáveis categóricas.
 
-![Alt text](<feature importance-1.png>)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/feature%20importance.png?raw=true)
 
 Por fim, utilizei o método do SelectFromModel. O SelectFromModel selecionará aquelas características cuja importância seja maior do que a importância média de todas as características por padrão. As características selecionadas com base na importância são: `cylinders_4 cylinders`, `cylinders_8 cylinders`, `fuel_gas` ,`fuel_other`, `drive_fwd`,`year`,`odometer`.
 
@@ -438,7 +438,7 @@ Continuemos com a interpretação dos modelos de regressão. O intercepto dos co
 
 Cada contribuição lista como ela contribui para cada um dos rótulos (o viés mais a contribuição devem somar a previsão). Ao fim obti o seguinte gráfico:
 
-![Alt text](contribuicao_media-1.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/contribuicao_media.png?raw=true) 
 
 Através desse gráfico, vemos claramente que a variável `odometer` e `drive_fwd` tem as maiores contribuições em fazer com que a árvore preveja que os preços serão mais altos. Já `year` e `fuel_gas` contribuem para que os preços sejam mais baixos.
 
@@ -450,3 +450,5 @@ Acredito que os resultados do modelo estejam razoavelmente satisfatórios. Os pr
 - Tratar as variáveis com alta cardinalidade por outros métodos que não o One Hot Encoding.
 - Fazer um modelo com apenas as variáveis consideradas importantes pelos testes de feature importance.
 - Fazer o deploy em aplicativo web que permitiria que o cliente escolhesse características do carro e pudesse ter a previsão de seu preço.
+
+## 7. Referências
