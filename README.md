@@ -39,7 +39,7 @@ Os passos tomados na análise preditiva foram:
 
 Eu iniciei esse projeto realizando alguns processos básicos de limpeza de dados tais como checar por duplicatas, valores ausentes e eliminando colunas que não seriam úteis na análise.
 
-![ausentes](<valores ausentes.png>)
+![ausentes](https://github.com/biancaportela/vendas_carros/blob/main/imagens/valores%20ausentes.png?raw=true)
 
 O primeiro problema encontrado no dataset é a quantidade de dados ausentes. É preciso tratar cada coluna de maneira diferenciada para obter os melhores resultados. Vendo esses valores em números e em relação à amostra total temos que:
 | Coluna       | Número de nulos | Porcentagem    |
@@ -74,17 +74,17 @@ O próximo desafio na limpeza de dados foi lidar com os outliers nas variáveis 
 ### 3.2.1 Variável preço
 
 Por exemplo, na variável preço temos que:
-![Alt text](boxplot_price.png)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/boxplot_price.png?raw=true)
 
 O número de outiliers é tão grande que não é possível ver a distribuição. Para lidar com esses dados, eu filtrei o dataset até que houvesse um intervalo razoável de valores. Assim, foram eliminados todos os veículos que tivessem um preço superior a $150.000 e os veículos que custassem menos de $500 doláres. A distribuição final ficou dessa maneira:
 
-![Alt text](boxplot_price_clean.png)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/boxplot_price_clean.png?raw=true)
 
 Podemos ter uma noção mais real da verdadeira distribuição. Ainda temos um número considerável de outliers. Como esses valores estão próximos uns dos outros, resta o questionamento se são *realmente* valores discrepantes e se sua retirada irá afetar o modelo.
 
 Procedimento similar foi feito nas variáveis de ano e hodomêtro. Na variável de ano foram eliminados todos os valores que datavam pré 1960. Em `odometer` foram todos os valores acima de 400000 e iguais a 0. O boxplot final se dá por:
 
-![Alt text](outlier_odo.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/outlier_odo.png?raw=true) 
 
 - Saimos de 426880 para 376778 observações após limpeza dos dados.
 
@@ -94,18 +94,18 @@ O principal objetivo desta fase da análise é o entedimento das distribuições
 
 Alguns resultados interessentes que temos é que:
 
-![Alt text](carros_distribuicao-2.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/carros_distribuicao.png?raw=true) 
 - A maioria dos carros tem condição excelente ou boa, com essas duas categorias somando mais de 60% do dataset.
 
-![Alt text](preco_hist-1.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/preco_hist.png?raw=true) 
 
 - Em relação ao preço, parte da distribuição se concentram entre preços até 40000 doláres, mas ainda assim é uma distribuição assimétrica.
 
-![Alt text](precoxodometro.png)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/precoxodometro.png?raw=true)
 
 - Parece que, em nível, odômetro está negativamente relacionado com preço: quanto maior o número do odômetro, menor o preço.
 
-![Alt text](anoxodometro-1.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/anosxodometro.png?raw=true) 
 
 - Carros entre 2000-2015 tem maior número milhas rodadas, enquanto carros mais velhos tem um registro de milhas menor. O senso comum sugere o contrário, que quanto mais velho o carro maior seja o valor do odômetro. Mas talvez isso seja apenas um viés no dataset: os carros mais velhos do que 2000 ainda estão sendo vendidos em carros usados justamente por serem mais conservados.
 
@@ -134,13 +134,13 @@ O principal objetivo da transformação das variáveis é tornar linear uma rela
 O uso de logarítimos é um dos principais instrumentos matemáticos utilizados na modelagem estatística. A utilização do logaritmo natural é preferida nesse caso, em razão de uma propriedade interessante do logaritmo natural: pequenas variações no logaritmo natural representam variações percentuais na variável em análise.
 Dessa maneira, optou-se por fazer a transformação logaritmica do `price` e `odometer`.  Foi possível deixa-las mais próximas da normalidade, como podemos ver pela variável `price`:
 
-![Alt text](<ln preco.png>)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/ln%20preco.png?raw=true)
 
 Ainda assim as variáveis ainda apresentem cauda longa, o que pode ser comprovado por um teste de normalidade. A relevância dos testes de normalidade reside no fato que algumas estratégia estatisticas são baseados no pressuposto de normalidade. Esse é o caso da regressão linear por mínimos quadrados ordinários.
 
 É possível utilizar o Q-Q Plot para confirmar se as variáveis apresentam distribuição normal. O Q-Q plot é um gráfico que permite realizar a comparação visual dos quartis da amostra com os quartis teóricos para uma distribuição normal. Se as observações se distanciam da linha reta, a variável não apresenta distribuição normal. Esse não é o caso das variáveis analisadas:
 
-![Alt text](normalidea_base_p.png)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/normalidea_base_p.png?raw=true)
 
 Como temos muitos dados e alguns outliers que fazem a distribuição ser assimétricas, assumi que os dados tendem a normalidade pelo teorema do limite central e prossegui com a regressão.
 Após, testei a normalidade dos resíduos, que é pressuposto para o modelo linear clássico. No caso de falha, teremos que lidar com este problema de maneiras mais sofisticadas.
@@ -153,7 +153,7 @@ O coeficiente de correlação permite calcular a direção e o grau de associaç
 
 O problema é que o coeficiente de correlação de Pearson é sensível à presença de outliers. Podemos utilizar o Spearman's Rho, que não requer que os dados apresentam distribuição normal.
 
-![Alt text](correlacao-1.png) 
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/correlacao.png?raw=true) 
 
 - Podemos ver que `ln_odometer` e `ln_price` estão correlacionados de maneira negativa, de forma forte. Isso indica que quanto maior o valor do odomêtro menor o  preço.
 
@@ -193,7 +193,7 @@ Em que $\beta_{carro}$ correspondem  a 'year', 'manufacturer', 'model', 'conditi
 Nosso modelo é um caso de modelo log-log, ou modelo de elasticidade constante, em que $\beta_1$ é a elasticidade de y em relação a x, ou seja, a variação percentual de y dado uma variação percentual em x. 
 
 
-![Alt text](<ols results.png>)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/ols%20results.png?raw=true)
 
 -O coeficiente de `ln_odometer` é a elasticidade do preço em relação ao odomêtro. Assim, quando o odomêtro aumenta em 1% o preço cai em 0.1183%, tudo mais constante.
 
@@ -292,7 +292,7 @@ No caso de variável omitida, temos que os nossos dados não são suficiente par
 
 ### 5.3.4: Teste de normalidade dos resíduos
 
-![Alt text](<residuos 2.png>)
+![Alt text](https://github.com/biancaportela/vendas_carros/blob/main/imagens/residuos%202.png?raw=true)
 
 Quando rodamos o teste de normalidade nos resíduos, vemos que eles se distanciam da linha vermelha. Mais uma violação do MQO.
 
