@@ -8,12 +8,8 @@ from PIL import Image
 
 # Carregar o dataset
 @st.cache_data
-def get_data():
-    df = pd.read_csv("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/dados/df_clean.csv")
-    
-    return df
-
-df = get_data()
+path = "C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/dados/df_clean.csv"
+df = pd.read_csv(path)
 
 st.title(':deciduous_tree: Sobre a Random Florest')
 st.markdown("---")
