@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-import requests
+import gdown
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -12,15 +12,16 @@ from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 # URL de compartilhamento do arquivo no Google Drive
 url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view'
 
+# Nome do arquivo de destino
+output = "sales_rfr.pkl"
+
 # Fazer o download do arquivo do Google Drive
-response = requests.get(url)
-with open('sales_rfr.pkl', 'wb') as file:
-    file.write(response.content)
+gdown.download(url, output, quiet=False)
 
-# Carregar o modelo treinado a partir do arquivo
-with open('sales_rfr.pkl', 'rb') as file:
+# Carregar o modelo treinado
+with open(output, 'rb') as file:
     model = pickle.load(file)
-
+    
 # Carregar o dataset
 @st.cache_data
 def get_data():
