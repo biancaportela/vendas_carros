@@ -1,5 +1,6 @@
 import streamlit as st
 import pickle
+import requests
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -7,11 +8,18 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
 ############  CARREGANDO MODELO E DATASET ##########
+#Modelo no google drive
+# URL de compartilhamento do arquivo no Google Drive
+url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view?usp=drive_link'
 
-# Carregar o modelo treinado
-with open('C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/sales_rfr.pkl', 'rb') as file:
+# Fazer o download do arquivo do Google Drive
+response = requests.get(url)
+with open('sales_rfr.pkl', 'wb') as file:
+    file.write(response.content)
+
+# Carregar o modelo treinado a partir do arquivo
+with open('sales_rfr.pkl', 'rb') as file:
     model = pickle.load(file)
-
 
 # Carregar o dataset
 @st.cache_data
