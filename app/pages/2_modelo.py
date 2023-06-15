@@ -9,7 +9,7 @@ from PIL import Image
 # Carregar o dataset
 @st.cache_data
 def get_data():
-    url = "https://raw.githubusercontent.com/biancaportela/vendas_carros/main/dados/df_clean.csv"
+    url = "dados/df_clean.csv"
     df = pd.read_csv(url)
     return df
 
