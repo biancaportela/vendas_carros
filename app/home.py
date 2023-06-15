@@ -15,8 +15,13 @@ with open('C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/sales_rfr.p
 
 # Carregar o dataset
 @st.cache_data
-url = "https://raw.githubusercontent.com/biancaportela/vendas_carros/main/dados/df_clean.csv"
-df = pd.read_csv(url)
+def get_data():
+    url = "https://raw.githubusercontent.com/biancaportela/vendas_carros/main/dados/df_clean.csv"
+    df = pd.read_csv(url)
+    return df
+
+# Carrega os dados
+df = get_data()
 
 # Função para verificar se um valor é numérico 
 def is_numeric(value):

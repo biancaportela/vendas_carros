@@ -8,8 +8,15 @@ import seaborn as sns
 
 # Carregar o dataset
 @st.cache_data
-url = "https://raw.githubusercontent.com/biancaportela/vendas_carros/main/dados/df_clean.csv"
-df = pd.read_csv(url)
+def get_data():
+    url = "https://raw.githubusercontent.com/biancaportela/vendas_carros/main/dados/df_clean.csv"
+    df = pd.read_csv(url)
+    return df
+
+# Carrega os dados
+df = get_data()
+
+
 
 st.title(':mag: Entendendo o dataset')
 st.markdown("---")
