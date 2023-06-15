@@ -98,7 +98,7 @@ st.markdown("""
 """
 )
 
-resid_2 = Image.open("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/imagens/hist_resid.png")
+resid_2 = Image.open("imagens/hist_resid.png")
 st.image(resid_2)
 
 st.markdown(
@@ -114,7 +114,7 @@ st.markdown(
             """
 )
 
-resid_3 = Image.open("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/imagens/pred_error.png")
+resid_3 = Image.open("imagens/pred_error.png")
 st.image(resid_3)
 
 st.title('Interpretação da árvore')
@@ -127,7 +127,7 @@ st.markdown("""
             """)
 
 
-tree = Image.open("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/imagens/tree.png")
+tree = Image.open("imagens/tree.png")
 st.image(tree)
 
 st.markdown("""
@@ -136,7 +136,7 @@ st.markdown("""
             
             """)
 
-features = Image.open("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/imagens/feature importance.png")
+features = Image.open("imagens/feature importance.png")
 st.image(features)
 
 st.markdown("""
@@ -147,7 +147,7 @@ st.markdown("""
             
             """)
 
-contribuicao_media = Image.open("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/imagens/contribuicao_media.png")
+contribuicao_media = Image.open("imagens/contribuicao_media.png")
 st.image(contribuicao_media)
 
 
