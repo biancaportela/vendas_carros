@@ -85,7 +85,7 @@ st.markdown("""
             """
 )
 
-resid_1 = Image.open("C:/Users/SAMSUNG/OneDrive/Documentos/GitHub/vendas_carros/imagens/arvore_resid.png")
+resid_1 = Image.open("imagens/arvore_resid.png")
 st.image(resid_1)
 
 
