@@ -11,7 +11,7 @@ from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 ############  CARREGANDO MODELO E DATASET ##########
 #Modelo no google drive
 # URL de compartilhamento do arquivo no Google Drive
-url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view'
+url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view?usp=sharing'
 
 # Nome do arquivo de destino
 output = "sales_rfr.pkl"
