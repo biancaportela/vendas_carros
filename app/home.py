@@ -109,10 +109,12 @@ def main(input_data):
                 Sinta-se à vontade para explorar o aplicativo e entre em contato se tiver dúvidas ou quiser discutir possíveis oportunidades de colaboração.
                                 
                 *Este projeto é um exemplo de modelo de machine learning criado para fins de demonstração e portfolio. As previsões de preços fornecidas pelo aplicativo são apenas simulações e não refletem valores reais de mercado.*
+                
+                > **Atenção: Este modelo foi treinado com a Random Forest, mas o tamanho do arquivo de treinamento é muito grande para ser carregado no aplicativo web. Rodar o modelo no site resultará em falha.**
 
 """)
     
-    st.subheader('Atenção: Este modelo foi treinado com a Random Forest, mas o tamanho do arquivo de treinamento é muito grande para ser carregado no aplicativo web. Rodar o modelo no site resultará em falha.')
+    
 
     st.title('Informe as características do carro desejado e iremos prever seu preço:')
     
