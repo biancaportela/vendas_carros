@@ -94,8 +94,8 @@ def main(input_data):
     # Código do Streamlit
     st.title('Previsão de preços de carros usados')
     
-    image = Image.open("https://raw.githubusercontent.com/biancaportela/vendas_carros/main/imagens/carros_usados.webp")
-    st.image(image, caption='Carros usados são um amplo mercado para quem quer um bom veículo por um preço mais razoável')
+    # image = Image.open("https://raw.githubusercontent.com/biancaportela/vendas_carros/main/imagens/carros_usados.webp")
+    # st.image(image, caption='Carros usados são um amplo mercado para quem quer um bom veículo por um preço mais razoável')
     
     st.markdown("""
                 
