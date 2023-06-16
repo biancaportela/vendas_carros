@@ -19,6 +19,17 @@ output = "sales_rfr.pkl"
 # Fazer o download do arquivo do Google Drive
 gdown.download(url, output, quiet=False)
 
+directory = '/app/vendas_carros/'
+
+# Listar os arquivos no diretório
+files = os.listdir(directory)
+
+# Verificar se o arquivo "sales_rfr.pkl" está presente
+if 'sales_rfr.pkl' in files:
+    print("O arquivo 'sales_rfr.pkl' está presente no diretório.")
+else:
+    print("O arquivo 'sales_rfr.pkl' não foi encontrado no diretório.")
+
 # Verificar o diretório de trabalho
 print("Diretório de trabalho:", os.getcwd())
 
