@@ -20,7 +20,7 @@ output = "sales_rfr.pkl"
 gdown.download(url, output, quiet=False)
 
 # Diretório onde o arquivo sales_rfr.pkl é salvo
-directory = 'vendas_carros/app/'
+directory = '/app/vendas_carros/app/home.py'
 
 # Listar os arquivos no diretório
 files = os.listdir(directory)
