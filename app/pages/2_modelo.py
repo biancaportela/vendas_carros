@@ -76,11 +76,12 @@ st.title('Análise de resíduos')
 
 
 st.markdown("""
-            Pelo desempenho superior do modelo de Random Forest, eu também analisei seus resíduos. A análise de resíduos é um tópico clássico relacionado à modelagem estatística e é frequentemente utilizada para avaliar a adequação de um modelo. Dessa maneira, os resíduos são calculados utilizando-se os dados de treinamento e usados para avaliar se as previssões do modelo se ajustam aos valores observados da variável dependente. Os resíduos também podem nos indicar se o modelo tem erros heterocedásticos ou se são afetados por outliers.
+            Pelo desempenho superior do modelo de Random Forest, eu também analisei seus resíduos. A análise de resíduos é um tópico clássico relacionado à modelagem estatística e é frequentemente utilizada para avaliar a adequação de um modelo. Dessa maneira, os resíduos são calculados utilizando-se os dados de treinamento e usados para avaliar se as previsões do modelo se ajustam aos valores observados da variável dependente. Os resíduos também podem nos indicar se o modelo tem erros heterocedásticos ou se são afetados por outliers.
 
             Para a maioria dos modelos, os resíduos devem apresentar um comportamento aleatório com certas propriedades (como, por exemplo, estar concentrados em torno de 0). Se encontrarmos quaisquer desvios sistemáticos do comportamento esperado, eles podem indicar um problema com o modelo (por exemplo, uma variável explicativa omitida ou uma forma funcional incorreta de uma variável incluída no modelo).
 
             Vemos isso no gráfico abaixo:
+
             
             """
 )
@@ -120,10 +121,10 @@ st.image(resid_3)
 st.title('Interpretação da árvore')
 
 st.markdown("""
-            Nessa seção eu me debruço em quais as variáveis o Random Florest considerou mais importate para fazer suas previsões. Saber quais variáveis são importantes e quais não são podem ajudar a otimizar o modelo e diminuir o tempo de convergência. 
+            Nessa seção eu me debruço em quais as variáveis o Random Florest considerou mais importante para fazer suas previsões. Saber quais variáveis são importantes e quais não são podem ajudar a otimizar o modelo e diminuir o tempo de convergência.
 
             Primeiramente, eu plotei uma das árvores de decisão feitas pelo algoritmo de Random Florest para os primeiros 3 níveis, de modo que possamos ter uma noção de como elas se divide. Nela podemos ver que a árvore é decidida por `year`, `drive_fwd`, `odômetro` e `cilindros` nos níveis iniciais.
-            
+
             """)
 
 

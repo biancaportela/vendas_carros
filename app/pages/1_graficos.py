@@ -22,18 +22,19 @@ st.title(':mag: Entendendo o dataset')
 st.markdown("---")
 st.markdown("""
             
-            O mercado de carros usados é uma indústria em constante crescimento. Os preços mais acessíveis dos veículos seminovos e usados frente aos modelos zero quilômetro contribuem para a expansão desse segmento, principalmente no Brasil, local que os preços dos carros novos estão muito elevados.
-
-            
-            O objetivo deste projeto foi criar um modelo preditivo que fornecesse aos clientes as ferramentas certas para guiá-las em sua experiência de compra e a tomarem decisões mais bem informadas. Esta página traz gráficos e descrição do dataset utilizado para treinar o modelo. 
-            
+            O mercado de carros usados é uma indústria em constante crescimento. Os preços mais acessíveis dos veículos seminovos e usados frente aos modelos zero quilômetro contribuem para a expansão desse segmento, principalmente no Brasil, local em que os preços dos carros novos estão muito elevados.
+           
+            O objetivo deste projeto foi criar um modelo preditivo que fornecesse aos clientes as ferramentas certas para guiá-las em sua experiência de compra e a tomarem decisões mais bem informadas. Esta página traz gráficos e descrição do dataset utilizado para treinar o modelo.
+           
             O surgimento de portais online como o Craiglist tem facilitado boas informações aos clientes e vendedores sobre as tendências e padrões que determinam o valor do carro usado no mercado.
-            
+           
             O dataset utilizado consiste de um webscrapping deste portal.A Craigslist é uma rede de comunidades online centralizadas que disponibiliza anúncios dos mais diversos tipos gratuitos aos usuários. Os dados foram raspados durante alguns meses e contém informações sobre carros usados na região dos Estados Unidos. Ele contém  426.880 observações e 26 colunas.
-            
+           
             O dataset foi atualizado pela última vez há 2 anos atrás.
 
+
             Um overview das primeiras 20 linhas do dataset:
+
             """
 )
 
@@ -51,10 +52,11 @@ st.title('Histogramas')
 st.markdown("""
             
             O histograma nos mostra  uma distribuição de frequências, onde a base de cada uma das barras representa uma classe, e a altura a quantidade ou frequência absoluta com que o valor da classe ocorre.
-            
+           
             Ele ajuda a visualizar e resumir grandes conjuntos de dados gráficos em variáveis contínuas. Abaixo temos os histogramas de preço e odômetro, após terem sido tratados para eliminação de valores discrepantes.
-            
-            A distribuição das duas colunas é assimétrica, mostrando que alguns outliers permanecem no dataset. 
+           
+            A distribuição das duas colunas é assimétrica, mostrando que alguns outliers permanecem no dataset.
+
             """)
 
 ######### HISTOGRAMAS
@@ -184,9 +186,10 @@ if coluna_selecionada:
 st.title('Gráficos de dispersão')
 
 st.markdown("""
-            Gráficos de dispersão nos permitem visuzalizar como duas variáveis se relacionam. Ao plotar os pontos no gráfico, é possível detectar padrões e tendências nos dados e identificar possíveis correlações entre as variáveis.
-            
+            Gráficos de dispersão nos permitem visualizar como duas variáveis se relacionam. Ao plotar os pontos no gráfico, é possível detectar padrões e tendências nos dados e identificar possíveis correlações entre as variáveis.
+           
             Abaixo há dois gráficos de dispersão: um que mostra a relação entre preço e a quantidade de milhas rodadas (odômetro) e outro que indica a relação entre o preço e o ano do carro.
+
             """)
 ######## GRAFICOS DE DISPERSÃO
 import matplotlib.pyplot as plt
@@ -214,11 +217,11 @@ scatterplot( df['year'],df['price'], 'Relação entre Preço e Ano', 'Ano', 'Pre
 st.title('Correlação')
 
 st.markdown("""
-           O objetivo da análise de correlação é verificar se se existe alguma associação entre as variáveis e, em caso positivo, qual a extensão dessa associação.
+           O objetivo da análise de correlação é verificar se existe alguma associação entre as variáveis e, em caso positivo, qual a extensão dessa associação.
            
-           O coeficiente de correlação permite calcular a direção e o grau de associação entre as variáveis. A covariância dos desvios padronizados é chamado de coeficiente de correlação de Pearson.Este coeficiente é a medida mais utilizada para a verificação preliminar da relação entre duas variáveis. 
+           O coeficiente de correlação permite calcular a direção e o grau de associação entre as variáveis. A covariância dos desvios padronizados é chamado de coeficiente de correlação de Pearson.Este coeficiente é a medida mais utilizada para a verificação preliminar da relação entre duas variáveis.
            
-           Entretanto, o coeficiente de correlação de Pearson é sensível à presença de outliers. Nesse caso, podemos utilizar o Spearman's Rho, que não requer que os dados apresentam distribuição normal. O Spearman's Rho mede o grau da relação monotônica entre duas variáveis e ele que utilizamos nesta análise:
+           Entretanto, o coeficiente de correlação de Pearson é sensível à presença de outliers. Nesse caso, podemos utilizar o Spearman's Rho, que não requer que os dados apresentem distribuição normal. O Spearman's Rho mede o grau da relação monotônica entre duas variáveis é ele que utilizamos nesta análise:
             
             """)
 

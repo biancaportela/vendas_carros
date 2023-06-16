@@ -99,19 +99,19 @@ def main(input_data):
     st.markdown("""
                 
                 Estamos vivendo um momento em que os preços dos carros novos estão cada vez mais altos. Porém, existe solução para aqueles que desejam adquirir um veículo de qualidade sem comprometer suas finanças: os carros semi-novos. E é exatamente nesse contexto que este aplicativo se destaca.
-                
-                Apresento um modelo mockup para fins de portfolio que tem como objetivo demonstrar solução inovadora no contexto do mercado de carros. Neste projeto, abordo o desafio de prever os preços de carros semi-novos com base em suas características.
+               
+                Apresento um modelo mockup para fins de portfólio que tem como objetivo demonstrar solução inovadora no contexto do mercado de carros. Neste projeto, abordo o desafio de prever os preços de carros semi-novos com base em suas características.
 
-                Com meu aplicativo, você pode selecionar as características desejadas de um carro e obter a previsão do seu preço. O modelo de  machine learning foi treinado com o algoritmo Random Forest e base de dados utilizada foi obtida através de webscrapping do site Craiglist -  ela está disponível no Kaggle.
+                Com meu aplicativo, você pode selecionar as características desejadas de um carro e obter a previsão do seu preço. O modelo de  machine learning foi treinado com o algoritmo Random Forest e a base de dados utilizada foi obtida através de webscrapping do site Craiglist -  ela está disponível no Kaggle.
 
                 Convido você a explorar as funcionalidades do aplicativo e conhecer as etapas do processo de previsão de preços de carros semi-novos. Nas páginas disponíveis, você encontrará informações detalhadas sobre a metodologia, métricas de avaliação e variáveis relevantes.
 
                 Sinta-se à vontade para explorar o aplicativo e entre em contato se tiver dúvidas ou quiser discutir possíveis oportunidades de colaboração.
-                                
-                *Este projeto é um exemplo de modelo de machine learning criado para fins de demonstração e portfolio. As previsões de preços fornecidas pelo aplicativo são apenas simulações e não refletem valores reais de mercado.*
-                
+                               
+                *Este projeto é um exemplo de modelo de machine learning criado para fins de demonstração e portfólio. As previsões de preços fornecidas pelo aplicativo são apenas simulações e não refletem valores reais de mercado.*
+               
                 > **Atenção: Este modelo foi treinado com a Random Forest, mas o tamanho do arquivo de treinamento é muito grande para ser carregado no aplicativo web. Rodar o modelo no site resultará em falha.**
-
+                
 """)
     
     
@@ -119,7 +119,7 @@ def main(input_data):
     st.title('Informe as características do carro desejado e iremos prever seu preço:')
     
     # Categorias numéricas
-    year = st.text_input('Iforme o ano do veículo desejado:')
+    year = st.text_input('Informe o ano do veículo desejado:')
     if not is_numeric(year):
         st.warning("Por favor, insira um valor numérico para o ano.")
 
@@ -131,7 +131,7 @@ def main(input_data):
 
     ##################         Variáveis categóricas    ########################################
 
-    manufacturer = st.selectbox('Selecione o o fabricante:', X['manufacturer'].unique())
+    manufacturer = st.selectbox('Selecione o fabricante desejado:', X['manufacturer'].unique())
 
     # condition
 
