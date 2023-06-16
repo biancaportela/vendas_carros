@@ -1,6 +1,7 @@
 import streamlit as st
-import joblib
+import pickle
 import gdown
+import os
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -9,7 +10,18 @@ from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
 ############  CARREGANDO MODELO E DATASET ##########
 
-model = joblib.load('app/modelo.joblib')
+# url = 'https://drive.google.com/uc?id=1KFlfbrNB1g1QqbGss2UPaASpHJnjBCoa'
+
+# # Nome do arquivo de destino
+# output = "sales_rfr.pkl"
+
+# # Fazer o download do arquivo do Google Drive
+# gdown.download(url, output, quiet=False)
+
+    
+# # Carregar o modelo treinado
+# with open(output, 'rb') as file:
+#     model = pickle.load(file)
     
 # Carregar o dataset
 @st.cache_data
