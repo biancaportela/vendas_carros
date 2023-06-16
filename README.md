@@ -6,10 +6,12 @@
 - [Análise Preditiva: Projeto Final](https://github.com/biancaportela/vendas_carros/blob/main/analise_preditiva.ipynb)
 - [Deploy do modelo](https://biancaportela-vendas-carros-apphome-pmjtpe.streamlit.app/)
 
-
 # Modelo em funcionamento
+Abaixo temos o vídeo de como o site com o deploy do modelo preditivo funciona. O modelo final foi treinado com o algoritmo de Random Forest, mas o tamanho do arquivo de treinamento é muito grande para ser carregado no aplicativo web. Rodar o modelo no site resultará em falha, portanto fiz a demonstração em máquina local e disponibilizo abaixo. As outras duas páginas (uma de estatísticas do datatset e outra explicando os modelos) carregam normalmente e podem ser exploradas no [aplicativo web]((https://biancaportela-vendas-carros-apphome-pmjtpe.streamlit.app/)).
 
-https://raw.githubusercontent.com/biancaportela/vendas_carros/main/imagens/app_deploy.mp4
+https://github.com/biancaportela/vendas_carros/assets/122315587/9ea3db9a-c0e2-49e8-9573-908fef605273
+
+
 # 1. Problema de negócios e objetivo da análise
 
 
@@ -632,7 +634,6 @@ Acredito que os resultados do modelo estejam razoavelmente satisfatórios. Os pr
 - Lidar melhor com os outliers, de maneira a melhorar as métricas do modelo.
 - Tratar as variáveis com alta cardinalidade por outros métodos que não o One Hot Encoding.
 - Fazer um modelo com apenas as variáveis consideradas importantes pelos testes de feature importance.
-- Fazer o deploy em aplicativo web que permitiria que o cliente escolhesse características do carro e pudesse ter a previsão de seu preço.
 
 
 ## 7. Referências
