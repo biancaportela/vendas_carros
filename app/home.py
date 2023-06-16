@@ -11,31 +11,18 @@ from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 ############  CARREGANDO MODELO E DATASET ##########
 #Modelo no google drive
 # URL de compartilhamento do arquivo no Google Drive
-url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view?usp=sharing'
+# url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view?usp=sharing'
 
-# Nome do arquivo de destino
-output = "sales_rfr.pkl"
+# # Nome do arquivo de destino
+# output = "sales_rfr.pkl"
 
-# Fazer o download do arquivo do Google Drive
-gdown.download(url, output, quiet=False)
+# # Fazer o download do arquivo do Google Drive
+# gdown.download(url, output, quiet=False)
 
-# Diretório onde o arquivo sales_rfr.pkl é salvo
-directory = '/app/vendas_carros/app/home.py'
-
-# Listar os arquivos no diretório
-files = os.listdir(directory)
-
-# Verificar se o arquivo sales_rfr.pkl está presente
-if 'sales_rfr.pkl' in files:
-    print("O arquivo 'sales_rfr.pkl' está presente no diretório.")
-else:
-    print("O arquivo 'sales_rfr.pkl' não foi encontrado no diretório.")
     
-    
-    
-# Carregar o modelo treinado
-with open(output, 'rb') as file:
-    model = pickle.load(file)
+# # Carregar o modelo treinado
+# with open(output, 'rb') as file:
+#     model = pickle.load(file)
     
 # Carregar o dataset
 @st.cache_data
