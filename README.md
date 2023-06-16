@@ -4,6 +4,8 @@
 - [Limpeza dos dados](https://github.com/biancaportela/vendas_carros/blob/main/limpeza.ipynb)
 - [Análise Econométrica: Projeto Final](https://github.com/biancaportela/vendas_carros/blob/main/analise_econometrica.ipynb)
 - [Análise Preditiva: Projeto Final](https://github.com/biancaportela/vendas_carros/blob/main/analise_preditiva.ipynb)
+- [Deploy do modelo](https://biancaportela-vendas-carros-apphome-pmjtpe.streamlit.app/)
+
 
 
 # 1. Problema de negócios e objetivo da análise
