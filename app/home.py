@@ -18,6 +18,7 @@ output = "sales_rfr.pkl"
 
 # Fazer o download do arquivo do Google Drive
 gdown.download(url, output, quiet=False)
+
 # Verificar o diretório de trabalho
 print("Diretório de trabalho:", os.getcwd())
 
