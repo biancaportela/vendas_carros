@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import gdown
+import os
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -17,7 +18,11 @@ output = "sales_rfr.pkl"
 
 # Fazer o download do arquivo do Google Drive
 gdown.download(url, output, quiet=False)
+# Verificar o diretório de trabalho
+print("Diretório de trabalho:", os.getcwd())
 
+# Verificar se o arquivo está presente
+print("Arquivos no diretório:", os.listdir())
 # Carregar o modelo treinado
 with open(output, 'rb') as file:
     model = pickle.load(file)
