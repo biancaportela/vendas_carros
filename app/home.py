@@ -9,20 +9,29 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
 ############  CARREGANDO MODELO E DATASET ##########
-#Modelo no google drive
+
 # URL de compartilhamento do arquivo no Google Drive
-# url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view?usp=sharing'
+url = 'https://drive.google.com/file/d/1-Y5bB6jUJmVHbEXIJirhHxn5aixx8o2H/view?usp=sharing'
 
-# # Nome do arquivo de destino
-# output = "sales_rfr.pkl"
+# Nome do arquivo de destino
+output = "sales_rfr.pkl"
 
-# # Fazer o download do arquivo do Google Drive
-# gdown.download(url, output, quiet=False)
+# Função para fazer o download do arquivo do Google Drive
+def download_file(url, output):
+    gdown.download(url, output, quiet=False)
 
-    
-# # Carregar o modelo treinado
-# with open(output, 'rb') as file:
-#     model = pickle.load(file)
+# Verifica se o arquivo já foi baixado
+if not os.path.exists(output):
+    # Exibe um botão para o usuário fazer o download
+    if st.button("Baixar modelo"):
+        # Chama a função para fazer o download
+        download_file(url, output)
+
+# Carrega o modelo treinado se o arquivo existir
+if os.path.exists(output):
+    with open(output, 'rb') as file:
+        model = pickle.load(file)
+        st.success("Modelo carregado com sucesso!")
     
 # Carregar o dataset
 @st.cache_data
