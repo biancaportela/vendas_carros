@@ -7,7 +7,9 @@
 - [Deploy do modelo](https://biancaportela-vendas-carros-apphome-pmjtpe.streamlit.app/)
 
 
+# Modelo em funcionamento
 
+https://raw.githubusercontent.com/biancaportela/vendas_carros/main/imagens/app_deploy.mp4
 # 1. Problema de negócios e objetivo da análise
 
 
