@@ -47,7 +47,7 @@ Os passos tomados na análise econométrica foram:
 ![Analise econometrica](https://github.com/biancaportela/vendas_carros/blob/main/imagens/Venda%20de%20carros.png?raw=true)
 
 
-- **Análise preditiva**Aqui constrói-se um modelo de previsão de preços. A ideia é treinar o modelo para que o cliente utilize características do carro para melhor auxiliá-lo na compra ou venda de um carro a um preço competitivo.
+- **Análise preditiva:** Aqui constrói-se um modelo de previsão de preços. A ideia é treinar o modelo para que o cliente utilize características do carro para melhor auxiliá-lo na compra ou venda de um carro a um preço competitivo.
 
 
 Os passos tomados na análise preditiva foram:
@@ -268,7 +268,7 @@ Em busca de analisar relações causais utilizei 4 modelos com diferentes formas
 A forma funcional utilizada foi:
 
 
-$$ ln\_price = \beta_0 + \beta_1 ln\_odometer + \beta_{carro}caracteristicas\_carro + u$$
+$$ ln\_price = \beta_0 + \beta_1 ln\_odometer + \beta_{carro}caracteristicas\_{carro} + u$$
 
 
 Em que $\beta_{carro}$ correspondem  a 'year', 'manufacturer', 'model', 'condition', 'cylinders', 'fuel', 'odometer', 'title_status', 'transmission', 'drive', 'type', 'paint_color', 'state'
@@ -292,10 +292,10 @@ Nosso modelo é um caso de modelo log-log, ou modelo de elasticidade constante, 
 As hipóteses têm um papel importante na análise de relações de causalidade: como não temos todo o universo para trabalhar e nem sempre é possível obter dados a partir de experimentos controlados, utilizamos amostras aleatórias supostamente representativas do universo que estamos estudando. Desta forma, as hipóteses permitem que a interpretação dos resultados seja extrapolada de forma ampla e generalizada, e garantem que as propriedades dos estimadores de MQO serão mantidas. Logo, caso elas sejam respeitadas  teremos um modelo não viesado, eficiente e consistente. As principais premissas são:
 
 
-1. **Hipótese 1**: As variáveis independentes e o termo de erro são não correlacionados -> caso essa hipótese seja violada, temos problemas de endogeneidade e os estimadores de MQO serão viesados e inconsistentes.
-2. **Hipótese 2**: Colineariedade não perfeita entre as variáveis independentes. A hipótese requer que nenhum dos regressores seja uma função linear perfeita dos outros regressores -> caso seja quebrada temos um problema de multicolinearidade e os estimadores de MQO são ineficientes.
-3. **Hipótese 3**Os termos de erro tem variância uniforme e não são correlacionados uns com os outros. Se a variável se altera com qualquer uma das variáveis explicativas, então temos heterocedasticidade -> Nesses casos os estimadores MQO são ineficientes, porém não viesados.
-4. **Hipótese 4**Os termos de erro são normalmente distribuídos. Quase nunca acontece, mas a Lei dos Grandes Números garante que, em uma grande amostra, o termo de erro apresenta distribuição que se aprocima da distribuição normal.
+1. **Hipótese 1** : As variáveis independentes e o termo de erro são não correlacionados -> caso essa hipótese seja violada, temos problemas de endogeneidade e os estimadores de MQO serão viesados e inconsistentes.
+2. **Hipótese 2** : Colineariedade não perfeita entre as variáveis independentes. A hipótese requer que nenhum dos regressores seja uma função linear perfeita dos outros regressores -> caso seja quebrada temos um problema de multicolinearidade e os estimadores de MQO são ineficientes.
+3. **Hipótese 3** : Os termos de erro tem variância uniforme e não são correlacionados uns com os outros. Se a variável se altera com qualquer uma das variáveis explicativas, então temos heterocedasticidade -> Nesses casos os estimadores MQO são ineficientes, porém não viesados.
+4. **Hipótese 4** : Os termos de erro são normalmente distribuídos. Quase nunca acontece, mas a Lei dos Grandes Números garante que, em uma grande amostra, o termo de erro apresenta distribuição que se aprocima da distribuição normal.
 
 
 ### 5.3.1 Problemas com o erro: Heterocedasticidade
@@ -305,7 +305,8 @@ O problema de heterocedasticidade acontece quando os termos de erro condicional 
 
 
 O teste que usaremos aqui é o teste de Breusch-Pagan. A ideia básica do teste é verificar se termos de erro ao quadrado ($u^2$) está relacionado, em valor esperado, a uma ou mais variáveis independentes. A hipótese nula é:
-$$ H_0: E(u^2|x_1, x_2, \ldots, x_k) = E(u^2) = \sigma^2$$
+
+$$ H_0: E(u^2|x_1, x_2, \ldots, x_k) = E(u^2) = \sigma^2 $$
 
 
 Se $H_0$ for falsa, o valor esperado de $u^2$, dadas as variáveis independentes, pode ser qualquer função de $x_j$
@@ -467,24 +468,24 @@ A solução, portanto, é usar versões modificadas da regressão linear que abo
 - **Regressão Ridge**: A regressão Ridge é um método de regressão regularizada que reduz a magnitude dos coeficientes através da adição de um termo de penalidade na função de perda, controlado pelo parâmetro de regularização. Isso ajuda a evitar o overfitting e melhora a estabilidade do modelo.
 
 
-- **Regressão de Huber**: um exemplo de algoritmo de regressão robusta que atribui menos peso às observações identificadas como outliers.
+- **Regressão de Huber** : um exemplo de algoritmo de regressão robusta que atribui menos peso às observações identificadas como outliers.
 
 
-- **RANSAC**: RANSAC (Random Sample Consensus) é um algoritmo não determinístico que tenta separar os dados de treinamento em inliers (que podem estar sujeitos a ruído) e outliers. Em seguida, estima o modelo final usando apenas os inliers.
+- **RANSAC** : RANSAC (Random Sample Consensus) é um algoritmo não determinístico que tenta separar os dados de treinamento em inliers (que podem estar sujeitos a ruído) e outliers. Em seguida, estima o modelo final usando apenas os inliers.
 
 
-- **Random Forest**: é um algoritmo de aprendizado de máquina que combina várias árvores de decisão independentes e faz previsões tomando uma média ou votação das previsões individuais das árvores, resultando em um modelo mais robusto e com menor tendência ao overfitting.
+- **Random Forest** : é um algoritmo de aprendizado de máquina que combina várias árvores de decisão independentes e faz previsões tomando uma média ou votação das previsões individuais das árvores, resultando em um modelo mais robusto e com menor tendência ao overfitting.
 
 
-- **XGBoost**: XGBoost é um algoritmo de boosting de gradiente extremamente poderoso e eficiente, que utiliza árvores de decisão como estimadores fracos e realiza treinamento interativo para melhorar o desempenho preditivo em problemas de regressão e classificação.
+- **XGBoost** : XGBoost é um algoritmo de boosting de gradiente extremamente poderoso e eficiente, que utiliza árvores de decisão como estimadores fracos e realiza treinamento interativo para melhorar o desempenho preditivo em problemas de regressão e classificação.
 
 
 Para melhorar a previsão do modelo e evitar o overfitting, utilizei cross validation com 5 k-folds. Feito isso, avaliei os modelos através de algumas métricas. As métricas são R-quadrado, o MAE, RMSE e o MAD.
 
 
-- **R-quadrado**O R-quadrado é uma métrica que mede a proporção da variância total dos dados explicada pelo modelo de regressão, indicando o quão bem as variáveis independentes explicam a variabilidade da variável dependente.
-- **MAE**O MAE é uma métrica que calcula a média dos valores absolutos dos erros entre as previsões do modelo e os valores reais, fornecendo uma medida direta do tamanho médio dos erros de previsão.
-- **RMSE**(Raiz do Erro Quadrático Médio): O RMSE é uma métrica usada para avaliar a precisão de modelos de regressão, que calcula a raiz quadrada da média dos quadrados das diferenças entre os valores previstos e os valores reais.
+- **R-quadrado:** O R-quadrado é uma métrica que mede a proporção da variância total dos dados explicada pelo modelo de regressão, indicando o quão bem as variáveis independentes explicam a variabilidade da variável dependente.
+- **MAE:** O MAE é uma métrica que calcula a média dos valores absolutos dos erros entre as previsões do modelo e os valores reais, fornecendo uma medida direta do tamanho médio dos erros de previsão.
+- **RMSE** (Raiz do Erro Quadrático Médio): O RMSE é uma métrica usada para avaliar a precisão de modelos de regressão, que calcula a raiz quadrada da média dos quadrados das diferenças entre os valores previstos e os valores reais.
 - **MAD** (Erro Absoluto Médio): é uma métrica que calcula a média dos valores absolutos dos erros entre as previsões do modelo e os valores reais, proporcionando uma medida robusta e menos sensível a outliers do tamanho médio dos erros de previsão.
 
 
