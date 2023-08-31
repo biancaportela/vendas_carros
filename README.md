@@ -452,7 +452,7 @@ Durante a fase de preparação dos dados para a modelagem preditiva foram feitos
 
 - Separou-se a variável target do resto do dataset
 - Separou-se os dados entre treino e teste
-- Tratamento das variáveis categóricas através de one hot encoding: No One hot encoding, para cada nível categórico, criamos uma nova variável binária 0 ou 1. Como o modelo base será uma regressão linear, eliminaremos uma das dummies para evitar problemas de multicolinearidade perfeita.Para as variáveis `manufacturer` e `state` diminui as categorias de maneira similar ao que fiz na análise econométrica. Prefere eliminar a variável `model` por ela possuir mais de 2000 categorias únicas.
+- Tratamento das variáveis categóricas através de one hot encoding: No One hot encoding, para cada nível categórico, criamos uma nova variável binária 0 ou 1. Como o modelo base será uma regressão linear, eliminaremos uma das dummies para evitar problemas de multicolinearidade perfeita.Para as variáveis `manufacturer` e `state` diminui as categorias de maneira similar ao que fiz na análise econométrica. Preferi eliminar a variável `model` por ela possuir mais de 2000 categorias únicas.
 - Normalização dos dados: utilizei o MinMaxScaler para normalizar os dados. Como pretendo trabalhar com algumas regressões que utilizam penalização (Ridge), realizei a normalização em todas as colunas.
 
 
